@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package chat;
+
+option go_package = "./chat";
+
+message AddMessageRequest {
+  string chat_id = 1;
+  string message = 2;
+}
+
+message AddMessageResponse {}
+
+message GetMessagesRequest {
+  string chat_id = 1;
+}
+
+message GetMessagesResponse {
+  repeated string messages = 1;
+}
+
+message GetChatsRequest {}
+
+message GetChatsResponse {
+  repeated string chats = 1;
+}
+
+service ChatService {
+  rpc AddMessage(AddMessageRequest) returns (AddMessageResponse) {}
+  rpc GetMessages(GetMessagesRequest) returns (GetMessagesResponse) {}
+  rpc GetChats(GetChatsRequest) returns (GetChatsResponse) {}
+}
+
+
