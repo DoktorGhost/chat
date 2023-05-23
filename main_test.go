@@ -62,14 +62,14 @@ func TestGetMessages(t *testing.T) {
 	ctx := context.Background()
 
 	// Помещаем сообщения в Redis
-	err := redisClient.RPush(ctx, "chat1", "Message 1", "Message 2").Err()
+	err := redisClient.RPush(ctx, "chat2", "Message 1", "Message 2").Err()
 	if err != nil {
 		t.Fatalf("Failed to push messages to Redis: %v", err)
 	}
 
 	// Создаем запрос на получение сообщений
 	req := &pb.GetMessagesRequest{
-		ChatId: "chat1",
+		ChatId: "chat2",
 	}
 
 	// Вызываем метод GetMessages и проверяем результат
@@ -124,7 +124,7 @@ func TestGetChats(t *testing.T) {
 		t.Errorf("GetChats failed: %v", err)
 	}
 
-	expectedChats := []string{"chat1", "chat2"}
+	expectedChats := []string{"chat2", "chat1"}
 	if len(res.Chats) != len(expectedChats) {
 		t.Errorf("Unexpected number of chats. Expected: %d, Got: %d", len(expectedChats), len(res.Chats))
 	}
